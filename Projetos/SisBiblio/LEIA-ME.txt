@@ -1,0 +1,116 @@
+==========================================================
+SisBiblio - Sistema de Gestao da Biblioteca
+Disciplina: CMP1611 - Mini-Projeto de Software (PUC Goias)
+Aluno: Pedro Macedo Paronetto Faria Viana
+Matricula: 20221002800297
+==========================================================
+
+ESTRUTURA DO ENTREGAVEL
+-----------------------
+SisBiblio/
+  +-- OPROJETO/SisBiblio/   (projeto Eclipse - Java/Swing)
+  |     +-- src/            (codigo fonte em pacotes model/dao/view/util)
+  |     +-- lib/            (colocar aqui o driver JDBC MySQL)
+  |     +-- .project        (metadados Eclipse)
+  |     +-- .classpath
+  +-- BANCO_DADOS/
+  |     +-- sisbiblio.sql   (script de criacao + dados de teste)
+  +-- LEIA-ME.txt
+
+REQUISITOS DO AMBIENTE
+----------------------
+- Java JDK 11 ou superior
+- MySQL Server 8.x (ou MariaDB compativel)
+- Eclipse IDE for Java Developers
+- Driver JDBC: mysql-connector-j-8.3.0.jar
+
+DADOS DE ACESSO AO BANCO (padrao do projeto)
+--------------------------------------------
+   Banco:    sisbiblio
+   Usuario:  root
+   Senha:    root
+   URL:      jdbc:mysql://localhost:3306/sisbiblio
+   (Para alterar, edite OPROJETO/SisBiblio/src/util/Conexao.java)
+
+USUARIOS DE TESTE (login do sistema)
+------------------------------------
+   admin / admin
+   pedro / 1234
+
+PASSO A PASSO - PROFESSOR
+-------------------------
+1) CRIAR O BANCO DE DADOS
+   Abra o HeidiSQL (ou MySQL Workbench) com o usuario root/root.
+   Execute o script:
+       BANCO_DADOS/sisbiblio.sql
+   Ele cria o banco "sisbiblio" e popula tabelas com dados de teste.
+
+2) IMPORTAR O PROJETO NO ECLIPSE
+   No Eclipse, menu File > Import > General > Existing Projects into Workspace
+   - Selecione a pasta: OPROJETO/
+   - Marque o projeto "SisBiblio" > Finish.
+
+3) ADICIONAR O DRIVER JDBC
+   Baixe o JAR do MySQL Connector/J (mysql-connector-j-8.3.0.jar)
+   em https://dev.mysql.com/downloads/connector/j/ e coloque em:
+       OPROJETO/SisBiblio/lib/
+   No Eclipse: clique com botao direito no projeto > Build Path >
+   Configure Build Path > Libraries > Add JARs... > lib/mysql-connector-j-8.3.0.jar.
+   (O .classpath ja referencia este nome de arquivo.)
+
+4) EXECUTAR
+   Localize a classe "Main" (pacote padrao do src) > botao direito >
+   Run As > Java Application.
+   Sera exibida a Tela de Login. Use admin/admin para entrar.
+
+REQUISITOS DA AVALIACAO ATENDIDOS
+---------------------------------
+[I]    Conexao JDBC + POO  -> util.Conexao e classes model usadas em todos os DAOs.
+[II]   Indentacao consistente em todas as classes.
+[III]  Cabecalho de 1 a 3 linhas no topo de cada classe.
+[IV]   Validacao de campos (numericos, obrigatorios, datas) com mensagens de erro.
+[V]    CRUD completo nas seis entidades (Autor, Categoria, Livro, Leitor, Emprestimo, Usuario).
+[VI]   Cadastros basico (Autor, Categoria) e intermediario (Livro com Autor+Categoria via
+       combobox; Emprestimo com Leitor+Livro via combobox).
+[VII]  Login -> MenuPrincipal com menus: Cadastros (basico+intermediario),
+       Listagens (ListaEmprestimos) e Usuarios.
+[VIII] Pesquisa padrao em todos os cadastros + pesquisa complexa em CadLivro
+       (combobox de campo: Codigo/Titulo/ISBN + textfield), com tabela de resultados;
+       selecao na tabela ativa a aba Cadastro com os dados.
+[IX]   Janela de listagem (ListaEmprestimos) com 2 opcoes de ordenacao
+       (Data do Emprestimo e Nome do Leitor).
+[X]    Internacionalizacao PT/EN (ResourceBundle em resources/messages_*.properties),
+       configurada na janela CadUsuario.
+[XI]   Mensagens de exito/erro em todas as operacoes. Verificacao de duplicidade
+       (autor.nome, categoria.nome, livro.isbn, leitor.cpf/matricula, usuario.login).
+
+ARQUITETURA EM CAMADAS
+----------------------
+   view  -> telas Swing (TelaLogin, MenuPrincipal, Cad*.java, ListaEmprestimos)
+   model -> POJOs (Autor, Categoria, Livro, Leitor, Emprestimo, Usuario)
+   dao   -> acesso JDBC (AutorDAO, CategoriaDAO, LivroDAO, LeitorDAO, EmprestimoDAO, UsuarioDAO)
+   util  -> Conexao (JDBC) e Internacionalizacao (i18n)
+   resources -> messages_pt_BR.properties / messages_en_US.properties
+
+COMANDOS POWERSHELL (WINDOWS) - MYSQL E BANCO
+----------------------------------------------
+Obs.: Execute os comandos abaixo no PowerShell.
+
+1) INICIAR O SERVIDOR MYSQL (quando nao estiver como servico do Windows)
+   Start-Process -FilePath "C:\Program Files\MySQL\MySQL Server 8.4\bin\mysqld.exe" -ArgumentList "--basedir=C:\Program Files\MySQL\MySQL Server 8.4","--datadir=C:\ProgramData\MySQL\MySQL Server 8.4\Data","--port=3306","--bind-address=127.0.0.1","--console" -WindowStyle Hidden
+
+2) TESTAR SE O MYSQL SUBIU
+   & "C:\Program Files\MySQL\MySQL Server 8.4\bin\mysqladmin.exe" -h 127.0.0.1 -P 3306 -u root -proot ping
+
+3) CRIAR/RECRIAR O BANCO PELO SCRIPT DO PROJETO
+   Get-Content "BANCO_DADOS\sisbiblio.sql" | & "C:\Program Files\MySQL\MySQL Server 8.4\bin\mysql.exe" -h 127.0.0.1 -P 3306 -u root -proot
+
+4) VALIDAR BANCO, TABELAS E USUARIOS DE TESTE
+   & "C:\Program Files\MySQL\MySQL Server 8.4\bin\mysql.exe" -h 127.0.0.1 -P 3306 -u root -proot -e "SHOW DATABASES LIKE 'sisbiblio'; USE sisbiblio; SHOW TABLES; SELECT login,senha FROM usuario;"
+
+5) (OPCIONAL) AJUSTAR SENHA DO ROOT PARA 'root'
+   & "C:\Program Files\MySQL\MySQL Server 8.4\bin\mysql.exe" -h 127.0.0.1 -P 3306 -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED BY 'root'; FLUSH PRIVILEGES;"
+
+6) EXECUTAR A APLICACAO
+   No Eclipse: Run As > Java Application na classe Main
+   Login: admin / admin

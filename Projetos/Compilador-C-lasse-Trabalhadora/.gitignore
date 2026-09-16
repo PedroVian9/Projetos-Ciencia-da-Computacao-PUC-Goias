@@ -1,0 +1,114 @@
+# =====================================================
+#  ARQUIVOS GERADOS PELO COMPILADOR C-LASSE TRABALHADORA
+# =====================================================
+
+# Arquivos C gerados pelo compilador
+*.c
+
+# Executáveis gerados (Windows)
+*.exe
+
+# =====================================================
+#  ARQUIVOS TEMPORÁRIOS E DE SISTEMA
+# =====================================================
+
+# Arquivos temporários do Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Arquivos temporários do macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+
+# Arquivos temporários do Linux
+*~
+.nfs*
+
+# =====================================================
+#  PYTHON (CASO HAJA EXTENSÕES FUTURAS)
+# =====================================================
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# =====================================================
+#  IDEs E EDITORES
+# =====================================================
+
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+# PyCharm
+.idea/
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+
+# Atom
+.atom/
+
+# =====================================================
+#  LOGS E ARQUIVOS DE DEBUG
+# =====================================================
+
+# Logs
+*.log
+logs/
+
+# Arquivos de debug do GCC
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+# Core dumps
+core
+core.*

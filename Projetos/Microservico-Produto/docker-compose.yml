@@ -1,0 +1,33 @@
+services:
+  produtos-service:
+    build: .
+    container_name: produtos-service
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      ASPNETCORE_URLS: http://0.0.0.0:5002
+      ASPNETCORE_ENVIRONMENT: Production
+    ports:
+      - "5002:5002"
+    networks:
+      - portal-b2b-network
+
+  produtos-front:
+    build:
+      context: ./front-end
+      args:
+        VITE_BASE_PATH: ${VITE_BASE_PATH:-/produtos/}
+        VITE_PRODUTO_API_URL: ${VITE_PRODUTO_API_URL:-/api/produtos}
+    container_name: produtos-front
+    restart: unless-stopped
+    ports:
+      - "${FRONTEND_PORT:-8081}:80"
+    depends_on:
+      - produtos-service
+    networks:
+      - portal-b2b-network
+
+networks:
+  portal-b2b-network:
+    external: true

@@ -1,0 +1,13 @@
+Copie o JAR do driver JDBC do MySQL para esta pasta (lib):
+
+   mysql-connector-j-8.3.0.jar
+
+Download oficial:
+   https://dev.mysql.com/downloads/connector/j/
+
+Depois de copiar, no Eclipse: clique com botao direito no projeto
+> Build Path > Add JARs... > selecione o JAR em lib/.
+(O arquivo .classpath ja referencia "lib/mysql-connector-j-8.3.0.jar".)
+
+Caso voce baixe outra versao, ajuste o nome no .classpath ou
+renomeie o JAR para mysql-connector-j-8.3.0.jar.

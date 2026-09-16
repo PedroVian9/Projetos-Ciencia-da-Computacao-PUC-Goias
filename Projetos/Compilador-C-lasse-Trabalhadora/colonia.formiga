@@ -1,0 +1,23 @@
+formigaInteira natureza(){
+    // Declaração de variáveis das formigas
+    formigaInteira numero_formigas = 42;
+    formigaFlutuante peso_carga = 3.14;
+    formigaSentinela tem_comida = vigia;
+
+    // Estrutura condicional - se encontrar obstáculo
+    seObstaculo (numero_formigas > 0) {
+        numero_formigas = numero_formigas + 1;
+    } senaoCavar {
+        tem_comida = descansa;
+    }
+
+    // Loop enquanto houver comida
+    enquantoHouverComida (numero_formigas < 100) {
+        numero_formigas = numero_formigas * 2;
+    }
+
+    // Loop organizado (for)
+    marchar (formigaInteira i = 0; i < numero_formigas; i = i + 1) {
+        peso_carga = peso_carga - 0.1;
+    }
+}

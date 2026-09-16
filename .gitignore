@@ -9,6 +9,7 @@ release/
 .qtc_clangd/
 .qmake.stash
 *.user
+.claude/
 
 # Arquivos temporários
 *.log
