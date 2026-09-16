@@ -8,6 +8,7 @@ Repositório unificado de atividades, exercícios e projetos desenvolvidos duran
 | --- | --- |
 | [`2026-1/`](2026-1/) | Atividades do primeiro semestre de 2026, incluindo Fundamentos de Programação, AED e provas. |
 | [`Acervo-Historico/`](Acervo-Historico/) | Exercícios e projetos de períodos anteriores, com materiais de Laboratório de Programação e Estrutura de Dados. |
+| [`Projetos/JogoDaForca/`](Projetos/JogoDaForca/) | Jogo da forca desenvolvido com frontend React, backend Python e ambiente Docker. |
 
 ## Tecnologias
 
