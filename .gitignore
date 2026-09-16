@@ -1,0 +1,16 @@
+# Arquivos gerados por compilação e IDEs
+build*/
+debug/
+release/
+*.o
+*.obj
+*.exe
+*.pro.user*
+.qtc_clangd/
+.qmake.stash
+*.user
+
+# Arquivos temporários
+*.log
+*.tmp
+*.bak
